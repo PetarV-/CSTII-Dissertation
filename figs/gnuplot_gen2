@@ -1,0 +1,12 @@
+set terminal epslatex color colortext;
+set output "roc_4.tex";
+set format xy "%g";
+set title 'Full GMHMM: Mean ROC curves after 10-fold crossvalidation';
+set xlabel 'False positive rate';
+set ylabel 'True positive rate';
+set key bottom right;
+set label 'Paired t-test: $p = 0.0437$' at graph 0.5,0.25;
+show label;
+plot [0:1] x with lines dashtype 2 linecolor 0 title 'random (area = 0.5)',\
+"roc_gmm" using 2:1 with lines linetype 1 lw 2 linecolor 1 title 'gmhmm (area = {\bf 0.985})',\
+"roc_muxg" using 2:1 with lines linetype 1 lw 2 linecolor 2 title 'multiplex (area = 0.919)';

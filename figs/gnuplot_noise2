@@ -1,0 +1,18 @@
+set terminal epslatex color colortext;
+set output "noise_2.tex";
+set format xy "%g";
+set xrange [-0.1:2.1];
+set title 'Full GMHMM: Noise testing results';
+set xlabel 'Noise standard deviation, $\sigma_n$';
+set ylabel 'Accuracy';
+set key top right;
+stats "noise_2" using 1:2 name "A"
+stats "noise_2m" using 1:2 name "B"
+f(x) = A_slope*x + A_intercept;
+g(x) = B_slope*x + B_intercept;
+set label sprintf("gmhmm: $y=%.3fx + %.3f$\nmultiplex: $y=%.3fx + %.3f$", A_slope, A_intercept, B_slope, B_intercept) at 0,0.7;
+show label;
+plot "noise_2" with errorbars linecolor 1 title 'gmhmm',\
+f(x) linecolor 1 dashtype 2 lw 2 title sprintf("linear fit ($R^2 = %.3f$)", A_correlation * A_correlation),\
+"noise_2m" with errorbars linecolor 2 title 'multiplex',\
+g(x) linecolor 2 dashtype 2 lw 2 title sprintf("linear fit ($R^2 = %.3f$)", B_correlation * B_correlation);

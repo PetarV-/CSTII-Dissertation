@@ -1,0 +1,18 @@
+set terminal epslatex color colortext;
+set output "noise_1.tex";
+set format xy "%g";
+set xrange [-0.1:2.1];
+set title 'Chain GMHMM: Noise testing results';
+set xlabel 'Noise standard deviation, $\sigma_n$';
+set ylabel 'Accuracy';
+set key top right;
+stats "noise_1" using 1:2 name "A"
+stats "noise_1m" using 1:2 name "B"
+f(x) = A_slope*x + A_intercept;
+g(x) = B_slope*x + B_intercept;
+set label sprintf("chain: $y=%.3fx + %.3f$\nmultiplex: $y=%.3fx + %.3f$", A_slope, A_intercept, B_slope, B_intercept) at 0,0.65;
+show label;
+plot "noise_1" with errorbars linecolor 7 title 'chain',\
+f(x) linecolor 7 dashtype 2 lw 2 title sprintf("linear fit ($R^2 = %.3f$)", A_correlation * A_correlation),\
+"noise_1m" with errorbars linecolor 6 title 'multiplex',\
+g(x) linecolor 6 dashtype 2 lw 2 title sprintf("linear fit ($R^2 = %.3f$)", B_correlation * B_correlation);
