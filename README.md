@@ -1,5 +1,5 @@
 # CSTII-Dissertation
-A clone of my final-year project dissertation for Part II of the Computer Science Tripos.
+A clone of my final-year project dissertation for Part II of the Computer Science Tripos, entitled *"Molecular multiplex network inference"*.
 
 The implementation described within this dissertation corresponds to the [CSTII-Ariana](https://github.com/PetarV-/CSTII-Ariana) repository. However, keep in mind that no further development (since submission) has happened on this repository. 
 
